@@ -1,6 +1,6 @@
 import pytest
 
-from constants import Drivers
+from constants import DriversEngine
 
 
 # Scope session:
@@ -9,6 +9,6 @@ from constants import Drivers
 # Run all test cases each one independently
 @pytest.fixture(scope="session")
 def browser(self):
-    driver = Drivers.Chrome
+    driver = DriversEngine.Chrome
     yield driver
     driver.quit()
