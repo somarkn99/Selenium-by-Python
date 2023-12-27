@@ -5,6 +5,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from config import Config
+
 
 class Setup(unittest.TestCase):
 
@@ -14,7 +16,7 @@ class Setup(unittest.TestCase):
     # Set up the test environment before each test case
     def setUp(self):
         self.driver = webdriver.Chrome()
-        self.driver.get("https://www.somar-kesen.com")
+        self.driver.get(Config.BASE_URL)
         self.driver.maximize_window()
 
     # Clean up the test environment after each test case
