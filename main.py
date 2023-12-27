@@ -8,16 +8,20 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class Setup(unittest.TestCase):
 
-    def shortDescription(self,testCaseDesc):
-        return "This is for {testCaseDesc}"
+    def shortDescription(self,test_case_desc):
+        return f"This is for {test_case_desc}"
 
+    # Set up the test environment before each test case
     def setUp(self):
         self.driver = webdriver.Chrome()
         self.driver.get("https://www.somar-kesen.com")
         self.driver.maximize_window()
 
+    # Clean up the test environment after each test case
     def tearDown(self):
-        self.driver.quit()
+        if self.driver:
+            # Quit the WebDriver, closing the browser window
+            self.driver.quit()
 
 
 class TestModule(Setup):
@@ -29,14 +33,18 @@ class TestModule(Setup):
         print('shortDescription: ',short_description)
         # Here the test code
         try:
+            # Wait for an element to be present on the page
             element = WebDriverWait(self.driver, 10).until(
                 EC.presence_of_element_located(By.ID, ''))
         finally:
             print("")
             expected_result = ""
+            # Get the text of the element
             actual_result = element.text
+            # Assert that the expected result matches the actual result
             assert expected_result == actual_result
 
 
+# Run the tests if this script is executed directly
 if __name__ == '__main__':
     unittest.main()
